@@ -46,8 +46,6 @@ let sessionId;
 const mainPage = () => {
     main.innerHTML = '';
 
-    sessionId = 0; //delete after test
-
     const welcomeTitle = document.createElement('h1');
     const username = userDB[sessionId].username;
 
