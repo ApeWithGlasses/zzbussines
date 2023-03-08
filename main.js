@@ -231,7 +231,6 @@ const loginForm = () => {
             const h2 = document.createElement('h2');
             const checkImage = document.createElement('img');
             const p = document.createElement('p');
-            const navegationBtn = document.createElement('input');
 
             //alert properties
             alertBox.classList = 'alert';
@@ -239,20 +238,17 @@ const loginForm = () => {
             h2.innerHTML = 'Ingreso de sesión correcto';
             checkImage.src = 'sources/checkImage.png';
             checkImage.alt = 'Check';
-            p.innerHTML = 'Navega por la plataforma haciendo click en el siguiente botón.';
-            navegationBtn.type = 'button';
-            navegationBtn.value = 'Navegar';
+            p.innerHTML = 'Redireccionando al panel de control';
 
             alertBox.appendChild(alertContainer);
 
             alertContainer.appendChild(h2);
             alertContainer.appendChild(checkImage);
             alertContainer.appendChild(p);
-            alertContainer.appendChild(navegationBtn);
 
             main.appendChild(alertBox);
 
-            navegationBtn.addEventListener('click', mainPage);
+            setTimeout(mainPage, 3000);
         } else {
             submitBtn.addEventListener('click', () => {
                 if (error) {
@@ -337,7 +333,6 @@ const registerForm = () => {
         const h2 = document.createElement('h2');
         const checkImage = document.createElement('img');
         const p = document.createElement('p');
-        const logInBtn = document.createElement('input');
 
         //alert properties
         alertBox.classList = 'alert';
@@ -345,26 +340,24 @@ const registerForm = () => {
         h2.innerHTML = 'Registro Exitoso';
         checkImage.src = 'sources/checkImage.png';
         checkImage.alt = 'Check';
-        p.innerHTML = 'Te invitamos a iniciar sesión presionando el siguiente botón.';
-        logInBtn.type = 'button';
-        logInBtn.value = 'Iniciar sesión';
+        p.innerHTML = 'En breves se te redireccionará a la página de inicio de sesión';
 
         alertBox.appendChild(alertContainer);
 
         alertContainer.appendChild(h2);
         alertContainer.appendChild(checkImage);
         alertContainer.appendChild(p);
-        alertContainer.appendChild(logInBtn);
 
         main.appendChild(alertBox);
 
         //REDIRECT LOGIN BUTTON
-        logInBtn.addEventListener('click', loginForm);
 
-        logInBtn.addEventListener('click', () => {
+        const automaticRedirect = () => {
             logInBtnIcon.remove();
             loginForm();
-        });
+        }
+
+        setTimeout(automaticRedirect, 4000);
 
         userDB.push(user);
     });
