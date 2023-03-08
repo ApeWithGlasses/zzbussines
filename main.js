@@ -2,19 +2,22 @@
 const main = document.querySelector('main');
 
 //DBS
-const userDB = [];
+const userDB = [{ username: 'admin', password: 'admin' }];
 const cellphoneDB = [];
 const laptopDB = [];
 
 //OBJECTS
 let user = {
     username: '',
+    password: '',
+}
+
+let client = {
     name: '',
     idNumber: '',
     phoneNumber: '',
     address: '',
     email: '',
-    password: '',
 }
 
 let cellphone = {
@@ -43,12 +46,121 @@ let sessionId;
 const mainPage = () => {
     main.innerHTML = '';
 
-    const title = document.createElement('h1');
-    const username = userDB[sessionId].username; 
+    sessionId = 0; //delete after test
 
-    title.innerHTML = 'BIENVENIDO ' + username;
+    const welcomeTitle = document.createElement('h1');
+    const username = userDB[sessionId].username;
 
-    main.appendChild(title);
+    welcomeTitle.innerHTML = 'BIENVENIDO ' + username;
+
+    const logOutBtn = document.createElement('button');
+    const logOutBtnImg = document.createElement('img');
+    const logOutBtnContainer = document.querySelector('.right');
+
+    //log out button properties
+    logOutBtnImg.src = 'sources/log_out.svg';
+    logOutBtnImg.alt = 'Log out icon';
+
+    logOutBtn.appendChild(logOutBtnImg);
+    logOutBtnContainer.appendChild(logOutBtn);
+
+    logOutBtn.addEventListener('click', () => {
+        sessionId = -1;
+        logOutBtn.remove();
+        loginForm();
+    });
+
+    const mainContainer = document.createElement('div');
+    const sidebar = document.createElement('div');
+    const panelControl = document.createElement('h2');
+    const clientRegisterBtn = document.createElement('button');
+    const phoneRegisterBtn = document.createElement('button');
+    const laptopRegisterBtn = document.createElement('button');
+    const container = document.createElement('div');
+
+    //sidebar & container div properties
+    mainContainer.classList = 'main-container';
+    sidebar.classList = 'sidebar-container';
+    panelControl.innerHTML = 'Panel de control';
+    clientRegisterBtn.innerHTML = 'Registrar cliente';
+    phoneRegisterBtn.innerHTML = 'Registrar celular';
+    laptopRegisterBtn.innerHTML = 'Registrar portátil';
+    container.classList = 'container';
+
+    sidebar.appendChild(panelControl);
+    sidebar.appendChild(clientRegisterBtn);
+    sidebar.appendChild(phoneRegisterBtn);
+    sidebar.appendChild(laptopRegisterBtn);
+
+    mainContainer.appendChild(sidebar);
+    mainContainer.appendChild(container);
+
+    container.appendChild(welcomeTitle);
+
+    //container elements
+    const btnContainer = document.createElement('div');
+    const containerClientBtn = document.createElement('button');
+    const containerPhoneBtn = document.createElement('button');
+    const containerLaptopBtn = document.createElement('button');
+
+    btnContainer.classList = 'btn-container';
+    containerClientBtn.innerHTML = 'Registrar cliente';
+    containerPhoneBtn.innerHTML = 'Registrar celular';
+    containerLaptopBtn.innerHTML = 'Registrar portátil';
+
+    btnContainer.appendChild(containerClientBtn);
+    btnContainer.appendChild(containerPhoneBtn);
+    btnContainer.appendChild(containerLaptopBtn);
+
+    container.appendChild(btnContainer);
+
+    main.appendChild(mainContainer);
+
+    //CLIENT REGISTER FORM
+    const clientRegisterForm = () => {
+        
+    }
+
+    //PHONE REGISTER FORM
+    const phoneRegisterForm = () => {
+        
+    }
+
+    //LAPTOP REGISTER FORM
+    const laptopRegisterForm = () => {
+        
+    }
+
+    //button behaviors
+    clientRegisterBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        clientRegisterForm();
+    });
+
+    containerClientBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        clientRegisterForm();
+    });
+
+    phoneRegisterBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        phoneRegisterForm();
+    });
+
+    containerPhoneBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        phoneRegisterForm();
+    });
+
+    laptopRegisterBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        laptopRegisterForm();
+    });
+    
+    containerLaptopBtn.addEventListener('click', () => {
+        container.innerHTML = '';
+        laptopRegisterForm();
+    });
 }
 
 //LOGIN FORM
@@ -154,28 +266,18 @@ const loginForm = () => {
 
 // REGISTER FORM
 
-window.addEventListener('load', () => {
+const registerForm = () => {
     const formContainer = document.createElement('div');
     const form = document.createElement('form');
     const title = document.createElement('h1');
     const usernameLabel = document.createElement('label');
     const usernameInput = document.createElement('input');
-    const nameLabel = document.createElement('label');
-    const nameInput = document.createElement('input');
-    const idCardLabel = document.createElement('label');
-    const idCardInput = document.createElement('input');
-    const phoneNumberLabel = document.createElement('label');
-    const phoneNumberInput = document.createElement('input');
-    const addressLabel = document.createElement('label');
-    const addressInput = document.createElement('input');
-    const emailLabel = document.createElement('label');
-    const emailInput = document.createElement('input');
     const passwordLabel = document.createElement('label');
     const passwordInput = document.createElement('input');
     const submitBtn = document.createElement('input');
-    const userBtn = document.createElement('button');
-    const userIcon = document.createElement('img');
-    const userIconContainer = document.querySelector('.right');
+    const logInBtnIcon = document.createElement('button');
+    const logInBtnImg = document.createElement('img');
+    const logInBtnContainer = document.querySelector('.right');
 
 
     //div properties
@@ -190,36 +292,6 @@ window.addEventListener('load', () => {
     usernameInput.type = 'text';
     usernameInput.required = true;
 
-    //name label/input properties
-    nameLabel.htmlFor = 'name';
-    nameLabel.innerHTML = 'Ingrese su nombre:';
-    nameInput.type = 'text';
-    nameInput.required = true;
-
-    //idcard label/input properties
-    idCardLabel.htmlFor = 'idCard';
-    idCardLabel.innerHTML = 'Ingrese su documento de identidad:';
-    idCardInput.type = 'text';
-    idCardInput.required = true;
-
-    //cellnumber label/input properties
-    phoneNumberLabel.htmlFor = 'phoneNumber';
-    phoneNumberLabel.innerHTML = 'Ingrese su número de celular:';
-    phoneNumberInput.type = 'text';
-    phoneNumberInput.required = true;
-
-    //address label/input properties
-    addressLabel.htmlFor = 'address';
-    addressLabel.innerHTML = 'Ingrese su dirección';
-    addressInput.type = 'text';
-    addressInput.required = true;
-
-    //email label/input properties
-    emailLabel.htmlFor = 'email';
-    emailLabel.innerHTML = 'Ingrese su correo electrónico:';
-    emailInput.type = 'email';
-    emailInput.required = true;
-
     //password label/input properties
     passwordLabel.htmlFor = 'password';
     passwordLabel.innerHTML = 'Ingrese una contraseña:';
@@ -230,32 +302,22 @@ window.addEventListener('load', () => {
     submitBtn.type = 'submit';
     submitBtn.value = 'Registrarse';
 
-    //user icon properties
-    userIcon.src = 'sources/user_icon.svg';
-    userIcon.alt = 'User icon';
+    //login button properties
+    logInBtnImg.src = 'sources/user_icon.svg';
+    logInBtnImg.alt = 'User icon';
 
-    userBtn.appendChild(userIcon);
-    userIconContainer.appendChild(userBtn);
+    logInBtnIcon.appendChild(logInBtnImg);
+    logInBtnContainer.appendChild(logInBtnIcon);
 
-    userBtn.addEventListener('click', () => {
-        userBtn.remove();
+    logInBtnIcon.addEventListener('click', () => {
+        logInBtnIcon.remove();
         loginForm();
     });
 
     usernameLabel.appendChild(usernameInput);
-    nameLabel.appendChild(nameInput);
-    idCardLabel.appendChild(idCardInput);
-    phoneNumberLabel.appendChild(phoneNumberInput);
-    addressLabel.appendChild(addressInput);
-    emailLabel.appendChild(emailInput);
     passwordLabel.appendChild(passwordInput);
 
     form.appendChild(usernameLabel);
-    form.appendChild(nameLabel);
-    form.appendChild(idCardLabel);
-    form.appendChild(phoneNumberLabel);
-    form.appendChild(addressLabel);
-    form.appendChild(emailLabel);
     form.appendChild(passwordLabel);
     form.appendChild(submitBtn);
 
@@ -267,11 +329,6 @@ window.addEventListener('load', () => {
     submitBtn.addEventListener('click', () => {
         event.preventDefault();
         user.username = usernameInput.value;
-        user.name = nameInput.value;
-        user.idNumber = idCardInput.value;
-        user.phoneNumber = phoneNumberInput.value;
-        user.address = addressInput.value;
-        user.email = emailInput.value;
         user.password = passwordInput.value;
 
         //REGISTER ALERT MESSAGE
@@ -280,7 +337,7 @@ window.addEventListener('load', () => {
         const h2 = document.createElement('h2');
         const checkImage = document.createElement('img');
         const p = document.createElement('p');
-        const logIngBtn = document.createElement('input');
+        const logInBtn = document.createElement('input');
 
         //alert properties
         alertBox.classList = 'alert';
@@ -289,26 +346,28 @@ window.addEventListener('load', () => {
         checkImage.src = 'sources/checkImage.png';
         checkImage.alt = 'Check';
         p.innerHTML = 'Te invitamos a iniciar sesión presionando el siguiente botón.';
-        logIngBtn.type = 'button';
-        logIngBtn.value = 'Iniciar sesión';
+        logInBtn.type = 'button';
+        logInBtn.value = 'Iniciar sesión';
 
         alertBox.appendChild(alertContainer);
 
         alertContainer.appendChild(h2);
         alertContainer.appendChild(checkImage);
         alertContainer.appendChild(p);
-        alertContainer.appendChild(logIngBtn);
+        alertContainer.appendChild(logInBtn);
 
         main.appendChild(alertBox);
 
         //REDIRECT LOGIN BUTTON
-        logIngBtn.addEventListener('click', loginForm);
+        logInBtn.addEventListener('click', loginForm);
 
-        logIngBtn.addEventListener('click', () => {
-            userBtn.remove();
+        logInBtn.addEventListener('click', () => {
+            logInBtnIcon.remove();
             loginForm();
         });
 
         userDB.push(user);
     });
-});
+}
+
+window.addEventListener('load', mainPage/*register form*/);
