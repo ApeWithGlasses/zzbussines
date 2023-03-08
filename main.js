@@ -370,4 +370,4 @@ const registerForm = () => {
     });
 }
 
-window.addEventListener('load', mainPage/*register form*/);
+window.addEventListener('load', registerForm);
