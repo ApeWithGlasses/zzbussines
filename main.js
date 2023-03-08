@@ -56,6 +56,7 @@ const mainPage = () => {
 const loginForm = () => {
     const formContainer = document.createElement('div');
     const form = document.createElement('form');
+    const title = document.createElement('h1');
     const usernameLabel = document.createElement('label');
     const usernameInput = document.createElement('input');
     const passwordLabel = document.createElement('label');
@@ -64,6 +65,9 @@ const loginForm = () => {
 
     //div properties
     formContainer.classList = 'form-container';
+
+    //title properties
+    title.innerHTML = 'Iniciar sesión';
 
     //username label/input properties
     usernameLabel.htmlFor = 'username';
@@ -88,6 +92,7 @@ const loginForm = () => {
     form.appendChild(passwordLabel);
     form.appendChild(submitBtn);
 
+    formContainer.appendChild(title);
     formContainer.appendChild(form);
 
     main.innerHTML = '';
@@ -152,6 +157,7 @@ const loginForm = () => {
 window.addEventListener('load', () => {
     const formContainer = document.createElement('div');
     const form = document.createElement('form');
+    const title = document.createElement('h1');
     const usernameLabel = document.createElement('label');
     const usernameInput = document.createElement('input');
     const nameLabel = document.createElement('label');
@@ -174,6 +180,9 @@ window.addEventListener('load', () => {
 
     //div properties
     formContainer.classList = 'form-container';
+
+    //title properties
+    title.innerHTML = 'Registrarse';
 
     //username label/input properties
     usernameLabel.htmlFor = 'username';
@@ -250,6 +259,7 @@ window.addEventListener('load', () => {
     form.appendChild(passwordLabel);
     form.appendChild(submitBtn);
 
+    formContainer.appendChild(title);
     formContainer.appendChild(form);
 
     main.appendChild(formContainer);

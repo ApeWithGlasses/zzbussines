@@ -130,9 +130,14 @@ p {
     width: 45%;
     height: 100%;
     margin: 100px auto 100px auto;
-    background: linear-gradient(45deg, rgba(112, 158, 244, 0.5), rgba(7, 65, 173, 0.5));
-    border: none;
-    border-radius: 3px;
+}
+
+.form-container h1 {
+    font-size: 2rem;
+    color: #0741ad;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 .form-container form {
@@ -140,6 +145,9 @@ p {
     display: flex;
     flex-direction: column;
     padding: 30px;
+    background: linear-gradient(45deg, rgba(112, 158, 244, 0.5), rgba(7, 65, 173, 0.5));
+    border: none;
+    border-radius: 3px;
 }
 
 .form-container form label {
