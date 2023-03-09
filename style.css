@@ -249,8 +249,9 @@ input[type="button"]:hover {
 }
 
 .sidebar-container {
+    top: 0;
+    left: 0;
     width: 15%;
-    height: 100%;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -280,11 +281,12 @@ input[type="button"]:hover {
 }
 
 .container {
+    flex-grow: 1;
     width: 85%;
 }
 
 .container h1 {
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     text-transform: uppercase;
     margin-top: 5%;

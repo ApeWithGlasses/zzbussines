@@ -3,44 +3,88 @@ const main = document.querySelector('main');
 
 //DBS
 const userDB = [{ username: 'admin', password: 'admin' }];
+const clientDB = [];
 const cellphoneDB = [];
 const laptopDB = [];
 
 //OBJECTS
-let user = {
-    username: '',
-    password: '',
+const createUserObject = (username, password) => {
+    const user = {
+        username: username,
+        password: password,
+    }
+    return user;
 }
 
-let client = {
-    name: '',
-    idNumber: '',
-    phoneNumber: '',
-    address: '',
-    email: '',
+const createClientObject = (name, idNumber, phoneNumber, address, email) => {
+    const client = {
+        name: name,
+        idNumber: idNumber,
+        phoneNumber: phoneNumber,
+        address: address,
+        email: email,
+    }
+    return client;
 }
 
-let cellphone = {
-    name: '',
-    reference: '',
-    code: '',
-    price: '',
-    stockQuantity: '',
-    productImage: '',
+const createCellphoneObject = (name, reference, code, price, stockQuantity, productImage) => {
+    const cellphone = {
+        name: name,
+        reference: reference,
+        code: code,
+        price: price,
+        stockQuantity: stockQuantity,
+        productImage: productImage,
+    }
+    return cellphone;
 }
 
-let laptop = {
-    name: '',
-    reference: '',
-    code: '',
-    price: '',
-    stockQuantity: '',
-    productImage: '',
+const createLaptopObject = (name, reference, code, price, stockQuantity, productImage) => {
+    const laptop = {
+        name: name,
+        reference: reference,
+        code: code,
+        price: price,
+        stockQuantity: stockQuantity,
+        productImage: productImage,
+    }
+    return laptop;
 }
 
 //SESSION ID FUNCTION
 
 let sessionId;
+
+//REGISTER OBJECT ALERT
+const registerAlert = () => {
+    //REGISTER ALERT MESSAGE
+    const alertBox = document.createElement('div');
+    const alertContainer = document.createElement('div');
+    const h2 = document.createElement('h2');
+    const checkImage = document.createElement('img');
+    const p = document.createElement('p');
+
+    //alert properties
+    alertBox.classList = 'alert';
+    alertContainer.classList = 'alert-container';
+    h2.innerHTML = 'Registro Exitoso';
+    checkImage.src = 'sources/checkImage.png';
+    checkImage.alt = 'Check';
+
+    alertBox.appendChild(alertContainer);
+
+    alertContainer.appendChild(h2);
+    alertContainer.appendChild(checkImage);
+
+    main.appendChild(alertBox);
+
+    //automatic alert delete
+    const alertDelete = () => {
+        alertBox.remove();
+    }
+
+    setTimeout(alertDelete, 2000);
+}
 
 //MAIN PAGE
 const mainPage = () => {
@@ -76,9 +120,12 @@ const mainPage = () => {
     const laptopRegisterBtn = document.createElement('button');
     const container = document.createElement('div');
 
+    let containerHeight = container.offsetHeight;
+
     //sidebar & container div properties
     mainContainer.classList = 'main-container';
     sidebar.classList = 'sidebar-container';
+    sidebar.style.height = '' + containerHeight + 'px;';
     panelControl.innerHTML = 'Panel de control';
     clientRegisterBtn.innerHTML = 'Registrar cliente';
     phoneRegisterBtn.innerHTML = 'Registrar celular';
@@ -116,17 +163,103 @@ const mainPage = () => {
 
     //CLIENT REGISTER FORM
     const clientRegisterForm = () => {
-        
+        const formContainer = document.createElement('div');
+        const form = document.createElement('form');
+        const title = document.createElement('h1');
+        const nameLabel = document.createElement('label');
+        const nameInput = document.createElement('input');
+        const idNumberLabel = document.createElement('label');
+        const idNumberInput = document.createElement('input');
+        const phoneNumberLabel = document.createElement('label');
+        const phoneNumberInput = document.createElement('input');
+        const addressLabel = document.createElement('label');
+        const addressInput = document.createElement('input');
+        const emailLabel = document.createElement('label');
+        const emailInput = document.createElement('input');
+        const submitBtn = document.createElement('input');
+
+        formContainer.classList = 'form-container';
+        formContainer.appendChild(form);
+
+        title.innerHTML = 'REGISTRAR CLIENTE';
+
+        container.appendChild(title);
+
+        //name label & input properties
+        nameLabel.innerHTML = 'Nombre completo';
+        nameInput.type = 'text';
+        nameInput.required = true;
+
+        nameLabel.appendChild(nameInput);
+
+        //idNumber label & input properties
+        idNumberLabel.innerHTML = 'Número de documento';
+        idNumberInput.type = 'text';
+        idNumberInput.required = true;
+
+        idNumberLabel.appendChild(idNumberInput);
+
+        //phoneNumber label & input properties
+        phoneNumberLabel.innerHTML = 'Número de celular o teléfono';
+        phoneNumberInput.type = 'text';
+        phoneNumberInput.required = true;
+
+        phoneNumberLabel.appendChild(phoneNumberInput);
+
+        //address input & label properties
+        addressLabel.innerHTML = 'Dirección';
+        addressInput.type = 'text';
+        addressInput.required = true;
+
+        addressLabel.appendChild(addressInput);
+
+        //email input & label properties
+        emailLabel.innerHTML = 'Correo electrónico';
+        emailInput.type = 'text';
+        emailInput.required = true;
+
+        emailLabel.appendChild(emailInput);
+
+        //submit btn properties
+        submitBtn.value = 'Registrar cliente';
+        submitBtn.type = 'submit';
+
+        form.appendChild(nameLabel);
+        form.appendChild(idNumberLabel);
+        form.appendChild(phoneNumberLabel);
+        form.appendChild(addressLabel);
+        form.appendChild(emailLabel);
+        form.appendChild(submitBtn);
+
+        container.appendChild(formContainer);
+
+        submitBtn.addEventListener('click', () => {
+            event.preventDefault();
+            
+            const client = createClientObject(nameInput.value, idNumberInput.value, phoneNumberInput.value, addressInput.value, emailInput.value);
+
+            registerAlert();
+
+            clientDB.push(client);
+
+            nameInput.value = '';
+            idNumberInput.value = '';
+            phoneNumberInput.value = '';
+            addressInput.value = '';
+            emailInput.value = '';
+
+            console.log(clientDB);
+        });
     }
 
     //PHONE REGISTER FORM
     const phoneRegisterForm = () => {
-        
+
     }
 
     //LAPTOP REGISTER FORM
     const laptopRegisterForm = () => {
-        
+
     }
 
     //button behaviors
@@ -154,7 +287,7 @@ const mainPage = () => {
         container.innerHTML = '';
         laptopRegisterForm();
     });
-    
+
     containerLaptopBtn.addEventListener('click', () => {
         container.innerHTML = '';
         laptopRegisterForm();
@@ -322,8 +455,7 @@ const registerForm = () => {
 
     submitBtn.addEventListener('click', () => {
         event.preventDefault();
-        user.username = usernameInput.value;
-        user.password = passwordInput.value;
+        const user = createUserObject(usernameInput.value, passwordInput.value);
 
         //REGISTER ALERT MESSAGE
         const alertBox = document.createElement('div');
@@ -355,7 +487,7 @@ const registerForm = () => {
             loginForm();
         }
 
-        setTimeout(automaticRedirect, 4000);
+        setTimeout(automaticRedirect, 2000);
 
         userDB.push(user);
     });
